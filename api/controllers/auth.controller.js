@@ -1,5 +1,10 @@
+// user.model.js is a user schima for the users to signup
 import User from "../models/user.model.js";
+// bcrypt is a middle ware used to encript data before sending
 import bcryptjs from "bcryptjs";
+// error handler import from error.js
+import { errorHandler } from "../utils/error.js";
+// jwt is jeson web token to create cookie for signin
 import jwt from "jsonwebtoken";
 // send data to database for login credential with the time stamp
 export const signup = async (req, res, next) => {
@@ -32,7 +37,7 @@ export const signin = async (req, res, next) => {
     const validPassword = bcryptjs.compareSync(password, validUser.password);
     if (!validPassword) return next(errorHandler(401, "Wrong credential!"));
     // The HTTP status code 401 is a client-side error that indicates that the user's login authentication credentials aren't working
-    // create username and password cookie for the browser without expire we can add expire at end
+    // create username and password cookie for the browser without expire as it is a session cookie we can add expire at end and jwt is a package which we need to install
     const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
     // removes the password which is coming from the database as we want to make the site secure to use
     const { password: pass, ...rest } = validUser._doc;
