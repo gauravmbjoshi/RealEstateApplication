@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import OAuth from "../components/OAuth";
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import OAuth from '../components/OAuth';
 
 export default function SignUp() {
   const [formData, setFormData] = useState({});
@@ -17,10 +17,10 @@ export default function SignUp() {
     e.preventDefault();
     try {
       setLoading(true);
-      const res = await fetch("/api/auth/signup", {
-        method: "POST",
+      const res = await fetch('/api/auth/signup', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
       });
@@ -33,7 +33,7 @@ export default function SignUp() {
       }
       setLoading(false);
       setError(null);
-      navigate("/sign-in");
+      navigate('/sign-in');
     } catch (error) {
       setLoading(false);
       setError(error.message);
@@ -46,36 +46,36 @@ export default function SignUp() {
         <input
           type='text'
           placeholder='username'
-          className='border p-3 rounded-lg outline-none'
+          className='border p-3 rounded-lg'
           id='username'
           onChange={handleChange}
         />
         <input
           type='email'
           placeholder='email'
-          className='border p-3 rounded-lg outline-none'
+          className='border p-3 rounded-lg'
           id='email'
           onChange={handleChange}
         />
         <input
           type='password'
           placeholder='password'
-          className='border p-3 rounded-lg outline-none'
+          className='border p-3 rounded-lg'
           id='password'
           onChange={handleChange}
         />
 
         <button
           disabled={loading}
-          className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80 outline-none'
+          className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'
         >
-          {loading ? "Loading..." : "Sign Up"}
+          {loading ? 'Loading...' : 'Sign Up'}
         </button>
-        <OAuth />
+        <OAuth/>
       </form>
       <div className='flex gap-2 mt-5'>
         <p>Have an account?</p>
-        <Link to={"/sign-in"}>
+        <Link to={'/sign-in'}>
           <span className='text-blue-700'>Sign in</span>
         </Link>
       </div>
